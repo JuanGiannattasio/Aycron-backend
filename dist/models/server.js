@@ -15,8 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 require("colors");
+const connection_1 = require("../db/connection");
+const user_route_1 = __importDefault(require("../routes/user.route"));
+const burger_route_1 = __importDefault(require("../routes/burger.route"));
+const auth_route_1 = __importDefault(require("../routes/auth.route"));
+const upload_route_1 = __importDefault(require("../routes/upload.route"));
+const search_route_1 = __importDefault(require("../routes/search.route"));
 class Server {
     constructor() {
+        this.apiPaths = {
+            users: '/api/user',
+            auth: '/api/auth',
+            burgers: '/api/burger',
+            upload: '/api/upload',
+            search: '/api/todo'
+        };
         this.app = express_1.default();
         this.port = process.env.PORT || '8081';
         // DB
@@ -28,6 +41,12 @@ class Server {
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield connection_1.dbConnection();
+            }
+            catch (error) {
+                console.log(error);
+            }
         });
     }
     middlewares() {
@@ -39,6 +58,11 @@ class Server {
         this.app.use(express_1.default.static('../public'));
     }
     routes() {
+        this.app.use(this.apiPaths.users, user_route_1.default);
+        this.app.use(this.apiPaths.auth, auth_route_1.default);
+        this.app.use(this.apiPaths.burgers, burger_route_1.default);
+        this.app.use(this.apiPaths.upload, upload_route_1.default);
+        this.app.use(this.apiPaths.search, search_route_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {
