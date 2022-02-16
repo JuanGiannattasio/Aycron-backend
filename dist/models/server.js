@@ -55,7 +55,7 @@ class Server {
         // Lectura y parseo del body
         this.app.use(express_1.default.json());
         // Public
-        this.app.use(express_1.default.static('../public'));
+        this.app.use(express_1.default.static('public'));
     }
     routes() {
         this.app.use(this.apiPaths.users, user_route_1.default);
