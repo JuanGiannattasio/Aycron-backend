@@ -1,40 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="522246527978-l9g2m51un5mfd5ci47qo1ddpq7nei4dp.apps.googleusercontent.com">
-    <title>Document</title>
-</head>
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <title>BurgerApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<style>@import url(https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;600&display=swap);*{margin:0;padding:0;box-sizing:border-box;text-decoration:none;transition:all .2s linear}html{scroll-behavior:smooth;scroll-padding-top:5rem}html::-webkit-scrollbar{width:.6rem}html::-webkit-scrollbar-track{background:#000}html::-webkit-scrollbar-thumb{background:#eacf4f;border-radius:5rem}body{background:url(background.6df88b11c3993a85ecb8.jpg);background-attachment:fixed;background-position:50%;overflow-x:hidden;font-family:Raleway,sans-serif}</style><link rel="stylesheet" href="styles.5c1865ff230bb23287e6.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.5c1865ff230bb23287e6.css"></noscript></head>
 <body>
-    <h1>Google SignIn</h1>
+  <app-root></app-root>
+<script src="runtime.d97f82de65e564fd327d.js" defer></script><script src="polyfills.5b86cee82d8d31422d02.js" defer></script><script src="main.9e2fe66f1eed47d06dda.js" defer></script>
 
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-    <a href="#" onclick="signOut();">Sign out</a>
-
-
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-             
-            const id_token = googleUser.getAuthResponse().id_token;
-            console.log(id_token)
-        }
-
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-            console.log('User signed out.');
-            });
-        }
-    </script>
-
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-</body>
-</html>
+</body></html>
