@@ -16,7 +16,7 @@ exports.dbConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(process.env.DB_CNN, {});
+        yield mongoose_1.default.connect(process.env.DB_CNN || 'mongodb+srv://burger_app:n54Qi5McgTSZWpoQ@cluster0.rbp9k.mongodb.net/burgerApp', {});
         console.log(`DB ${'online'.blue}`);
     }
     catch (error) {

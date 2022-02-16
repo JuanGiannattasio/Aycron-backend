@@ -9,7 +9,7 @@ export const generateJWT = ( uid: string ) => {
             uid
         }
 
-        jwt.sign( payload, process.env.JWT!, {
+        jwt.sign( payload, process.env.JWT! || '4est0esda456miclasda564ve545165sec154564re6465165ta', {
             expiresIn: '4h',
         }, (err, token) => {
 

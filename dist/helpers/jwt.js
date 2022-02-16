@@ -10,7 +10,7 @@ const generateJWT = (uid) => {
         const payload = {
             uid
         };
-        jsonwebtoken_1.default.sign(payload, process.env.JWT, {
+        jsonwebtoken_1.default.sign(payload, process.env.JWT || '4est0esda456miclasda564ve545165sec154564re6465165ta', {
             expiresIn: '4h',
         }, (err, token) => {
             if (err) {

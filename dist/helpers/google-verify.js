@@ -11,11 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.googleVerify = void 0;
 const google_auth_library_1 = require("google-auth-library");
-const client = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_ID);
+const client = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_ID || '522246527978-l9g2m51un5mfd5ci47qo1ddpq7nei4dp.apps.googleusercontent.com');
 const googleVerify = (token) => __awaiter(void 0, void 0, void 0, function* () {
     const ticket = yield client.verifyIdToken({
         idToken: token,
-        audience: process.env.GOOGLE_ID
+        audience: process.env.GOOGLE_ID || '522246527978-l9g2m51un5mfd5ci47qo1ddpq7nei4dp.apps.googleusercontent.com'
     });
     const payload = ticket.getPayload();
     // @ts-ignore

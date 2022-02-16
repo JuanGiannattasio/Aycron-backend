@@ -20,7 +20,7 @@ export const valdiateJWT = ( req: Request, res: Response, next: NextFunction ) =
     try {
         
         // @ts-ignore
-        const { uid } = jwt.verify( token, process.env.JWT! );
+        const { uid } = jwt.verify( token, process.env.JWT! || '4est0esda456miclasda564ve545165sec154564re6465165ta' );
 
         // @ts-ignore
         req.uid = uid;

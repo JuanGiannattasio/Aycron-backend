@@ -26,7 +26,7 @@ const valdiateJWT = (req, res, next) => {
     }
     try {
         // @ts-ignore
-        const { uid } = jsonwebtoken_1.default.verify(token, process.env.JWT);
+        const { uid } = jsonwebtoken_1.default.verify(token, process.env.JWT || '4est0esda456miclasda564ve545165sec154564re6465165ta');
         // @ts-ignore
         req.uid = uid;
         next();

@@ -31,7 +31,7 @@ class Server {
             search: '/api/todo'
         };
         this.app = express_1.default();
-        this.port = process.env.PORT || '8081';
+        this.port = process.env.PORT || '3001';
         // DB
         this.dbConnection();
         // Middlewares
