@@ -59,7 +59,7 @@ class Server {
         this.app.use( express.json() );
 
         // Public
-        this.app.use( express.static('../public') )
+        this.app.use( express.static('../public/index.html') )
 
     }
 
