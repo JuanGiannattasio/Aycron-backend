@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import 'colors'
 
@@ -9,6 +9,7 @@ import burgerRoute from '../routes/burger.route';
 import authRoute from '../routes/auth.route';
 import uploadRoute from '../routes/upload.route';
 import searchRoute from '../routes/search.route';
+import path from 'path';
 
 
 class Server {
@@ -59,7 +60,12 @@ class Server {
         this.app.use( express.json() );
 
         // Public
-        this.app.use( express.static('public') )
+        this.app.use( express.static('public'));
+
+        // Base route
+        this.app.get('*', (req: Request, res: Response) => {
+            res.sendFile( path.resolve(__dirname, '../public/index.html') )
+        })
 
     }
 
