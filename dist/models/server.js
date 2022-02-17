@@ -21,7 +21,6 @@ const burger_route_1 = __importDefault(require("../routes/burger.route"));
 const auth_route_1 = __importDefault(require("../routes/auth.route"));
 const upload_route_1 = __importDefault(require("../routes/upload.route"));
 const search_route_1 = __importDefault(require("../routes/search.route"));
-const path_1 = __importDefault(require("path"));
 class Server {
     constructor() {
         this.apiPaths = {
@@ -57,10 +56,10 @@ class Server {
         this.app.use(express_1.default.json());
         // Public
         this.app.use(express_1.default.static('public'));
-        // Base route
-        this.app.get('*', (req, res) => {
-            res.sendFile(path_1.default.resolve(__dirname, '../public/index.html'));
-        });
+        // // Base route
+        // this.app.get('*', (req: Request, res: Response) => {
+        //     res.sendFile( path.resolve(__dirname, '../public/index.html') )
+        // })
     }
     routes() {
         this.app.use(this.apiPaths.users, user_route_1.default);

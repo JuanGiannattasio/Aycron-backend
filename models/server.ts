@@ -62,10 +62,10 @@ class Server {
         // Public
         this.app.use( express.static('public'));
 
-        // Base route
-        this.app.get('*', (req: Request, res: Response) => {
-            res.sendFile( path.resolve(__dirname, '../public/index.html') )
-        })
+        // // Base route
+        // this.app.get('*', (req: Request, res: Response) => {
+        //     res.sendFile( path.resolve(__dirname, '../public/index.html') )
+        // })
 
     }
 
