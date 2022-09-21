@@ -60,9 +60,9 @@ class Server {
         this.app.use( express.json() );
 
         // Public
-        this.app.use( express.static('public'));
+        this.app.use( express.static( 'public'));
 
-        // // Base route
+        // Base route
         // this.app.get('*', (req: Request, res: Response) => {
         //     res.sendFile( path.resolve(__dirname, '../public/index.html') )
         // })
