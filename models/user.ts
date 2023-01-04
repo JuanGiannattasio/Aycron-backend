@@ -7,8 +7,6 @@ interface User {
     email: string;
     password: string;
     role: string;
-    img?: string;
-    google?: string
 }
 
 
@@ -31,13 +29,6 @@ const UserSchema = new Schema<User>({
         type: String,
         default: 'USER_ROLE',
         required: true
-    },
-    img: {
-        type: String,
-    },
-    google: {
-        type: Boolean,
-        default: false
     },
 
 });

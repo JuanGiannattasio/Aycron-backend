@@ -17,20 +17,20 @@ const cors_1 = __importDefault(require("cors"));
 require("colors");
 const connection_1 = require("../db/connection");
 const user_route_1 = __importDefault(require("../routes/user.route"));
-const burger_route_1 = __importDefault(require("../routes/burger.route"));
+const warehouse_route_1 = __importDefault(require("../routes/warehouse.route"));
 const auth_route_1 = __importDefault(require("../routes/auth.route"));
 const upload_route_1 = __importDefault(require("../routes/upload.route"));
-const search_route_1 = __importDefault(require("../routes/search.route"));
+// import searchRoute from '../routes/search.route';
 class Server {
     constructor() {
         this.apiPaths = {
             users: '/api/user',
             auth: '/api/auth',
-            burgers: '/api/burger',
+            warehouse: '/api/warehouse',
             upload: '/api/upload',
-            search: '/api/todo'
+            // search: '/api/todo'
         };
-        this.app = express_1.default();
+        this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
         // DB
         this.dbConnection();
@@ -42,7 +42,7 @@ class Server {
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield connection_1.dbConnection();
+                yield (0, connection_1.dbConnection)();
             }
             catch (error) {
                 console.log(error);
@@ -51,7 +51,7 @@ class Server {
     }
     middlewares() {
         // CORS
-        this.app.use(cors_1.default());
+        this.app.use((0, cors_1.default)());
         // Lectura y parseo del body
         this.app.use(express_1.default.json());
         // Public
@@ -64,9 +64,9 @@ class Server {
     routes() {
         this.app.use(this.apiPaths.users, user_route_1.default);
         this.app.use(this.apiPaths.auth, auth_route_1.default);
-        this.app.use(this.apiPaths.burgers, burger_route_1.default);
+        this.app.use(this.apiPaths.warehouse, warehouse_route_1.default);
         this.app.use(this.apiPaths.upload, upload_route_1.default);
-        this.app.use(this.apiPaths.search, search_route_1.default);
+        // this.app.use( this.apiPaths.search, searchRoute );
     }
     listen() {
         this.app.listen(this.port, () => {

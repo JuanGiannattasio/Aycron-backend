@@ -1,30 +1,28 @@
+
+
 import { Request, Response } from "express";
-import bcrypt from 'bcryptjs'
 
-import User from "../models/user";
-import { generateJWT } from "../helpers/jwt";
-import { getMenuFrontend } from '../helpers/menu-frontend';
+import Warehouse from "../models/warehouse";
 
-
-export const getUsers = async( req: Request, res: Response ) => {
+export const getWarehouses = async( req: Request, res: Response ) => {
 
     const desde = Number( req.query.desde ) || 0;
 
     // Paginacion y total de users
-    const [ users, total ] = await Promise.all([
-        User
-          .find({}, 'name email role google img')
+    const [ warehouses, total ] = await Promise.all([
+        Warehouse
+          .find({}, 'code name address state country zip lat long file')
           .skip( desde )
           .limit(5),
 
-        User.countDocuments()
+          Warehouse.countDocuments()
     ])
 
     try {
         
         return res.json({
             ok: true,
-            users,
+            warehouses,
             total
         })
 
@@ -39,15 +37,15 @@ export const getUsers = async( req: Request, res: Response ) => {
 }
 
 
-export const getUserById = async( req: Request, res: Response ) => {
+export const getWarehousesById = async( req: Request, res: Response ) => {
 
     const { id } = req.params;
 
     try {
         
         // Verificar si existe el user
-        const user = await User.findById( id );
-        if ( !user ) {
+        const warehouse = await Warehouse.findById( id );
+        if ( !warehouse ) {
             res.status(404).json({
                 ok: false,
                 msg: `El user no existe con ese ${id}`
@@ -56,7 +54,7 @@ export const getUserById = async( req: Request, res: Response ) => {
 
         return res.json({
             ok: true,
-            user
+            warehouse
         })
 
     } catch (error) {
@@ -70,37 +68,28 @@ export const getUserById = async( req: Request, res: Response ) => {
 }
 
 
-export const newUser = async( req: Request, res: Response ) => {
+export const newWarehouse = async( req: Request, res: Response ) => {
 
-    const { email, password } = req.body;
+    const { code } = req.body;
 
     try {
         
-        const userExists = await User.findOne({ email });
-        if ( userExists ) {
+        const warehouseExists = await Warehouse.findOne({ code });
+        if ( warehouseExists ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El email ya esta registrado'
+                msg: 'El code ya esta registrado'
             })
         }
 
-        const user = new User(req.body);
-
-        // Encriptar password
-        const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync( password, salt );
+        const warehouse = new Warehouse(req.body);
 
         // Guardar en DB
-        await user.save();
-
-        // Generar token
-        const token = await generateJWT( user.id )
+        await warehouse.save();
 
         return res.json({
             ok: true,
-            user,
-            token,
-            menu: getMenuFrontend( user!.role )
+            warehouse,
         })
 
     } catch (error) {
@@ -114,15 +103,15 @@ export const newUser = async( req: Request, res: Response ) => {
 }
 
 
-export const updateUser = async( req: Request, res: Response ) => {
+export const updateWarehouse = async( req: Request, res: Response ) => {
 
     const { id } = req.params;
 
     try {
         
         // Verificar si existe el user
-        const userDB = await User.findById( id );
-        if ( !userDB ) {
+        const warehouseDB = await Warehouse.findById( id );
+        if ( !warehouseDB ) {
             res.status(404).json({
                 ok: false,
                 msg: `El user no existe con ese ${id}`
@@ -132,15 +121,15 @@ export const updateUser = async( req: Request, res: Response ) => {
         // Update
         const { google, email, password, ...fields } = req.body;
 
-        if ( userDB?.email !== email  ) {
-            const emailExists = await User.findOne({ email });
-            if ( emailExists ) {
-                return res.status(400).json({
-                    ok: false,
-                    msg: `Ya existe un usuario con el email ${email}`
-                })
-            }
-        }
+        // if ( warehouseDB?.email !== email  ) {
+        //     const emailExists = await User.findOne({ email });
+        //     if ( emailExists ) {
+        //         return res.status(400).json({
+        //             ok: false,
+        //             msg: `Ya existe un usuario con el email ${email}`
+        //         })
+        //     }
+        // }
 
         // if ( !userDB?.google ) {
         //     fields.email = email;
@@ -151,12 +140,12 @@ export const updateUser = async( req: Request, res: Response ) => {
         //     })
         // }
 
-        const userUpdated = await User.findByIdAndUpdate( id, fields, { new: true } )
+        // const userUpdated = await User.findByIdAndUpdate( id, fields, { new: true } )
 
-        return res.json({
-            ok: true,
-            userUpdated
-        })
+        // return res.json({
+        //     ok: true,
+        //     userUpdated
+        // })
 
     } catch (error) {
         console.log(error);
@@ -169,13 +158,13 @@ export const updateUser = async( req: Request, res: Response ) => {
 }
 
 
-export const deleteUser = async( req: Request, res: Response ) => {
+export const deleteWarehouse = async( req: Request, res: Response ) => {
 
     const { id } = req.params;
 
     try {
         
-        const userDB = await User.findById( id );
+        const userDB = await Warehouse.findById( id );
         if ( !userDB ) {
             return res.status(404).json({
                 ok: false,
@@ -183,7 +172,7 @@ export const deleteUser = async( req: Request, res: Response ) => {
             })
         }
 
-        await User.findByIdAndDelete( id );
+        await Warehouse.findByIdAndDelete( id );
 
         return res.json({
             ok: true,

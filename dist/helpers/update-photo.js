@@ -14,8 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updatePhoto = void 0;
 const fs_1 = __importDefault(require("fs"));
-const burger_1 = __importDefault(require("../models/burger"));
-const user_1 = __importDefault(require("../models/user"));
+const warehouse_1 = __importDefault(require("../models/warehouse"));
 const deleteImage = (path) => {
     // Eliminando el path de la imagen anterior
     if (fs_1.default.existsSync(path)) {
@@ -24,39 +23,19 @@ const deleteImage = (path) => {
 };
 const updatePhoto = (type, id, archiveName) => __awaiter(void 0, void 0, void 0, function* () {
     let oldPath = '';
-    switch (type) {
-        case 'users':
-            // Verificadno que existe user por ese id
-            const userDB = yield user_1.default.findById(id);
-            if (!userDB) {
-                console.log('No existe user por ese ID');
-                return false;
-            }
-            ;
-            oldPath = `./uploads/users/${userDB.img}`;
-            deleteImage(oldPath);
-            // Cambiando el name y guardando en db
-            userDB.img = archiveName;
-            yield userDB.save();
-            return true;
-            break;
-        case 'burgers':
-            // Verificadno que existe user por ese id
-            const burgerDB = yield burger_1.default.findById(id);
-            if (!burgerDB) {
-                console.log('No existe burger por ese ID');
-                return false;
-            }
-            ;
-            console.log(burgerDB.img);
-            oldPath = `./uploads/burgers/${burgerDB.img}`;
-            deleteImage(oldPath);
-            // Cambiando el name y guardando en db
-            burgerDB.img = archiveName;
-            yield burgerDB.save();
-            return true;
-            break;
+    // Verificadno que existe user por ese id
+    const warehouseDB = yield warehouse_1.default.findById(id);
+    if (!warehouseDB) {
+        console.log('No existe warehouse por ese ID');
+        return false;
     }
+    ;
+    oldPath = `./uploads/warehouse/${warehouseDB.file}`;
+    deleteImage(oldPath);
+    // Cambiando el name y guardando en db
+    warehouseDB.file = archiveName;
+    yield warehouseDB.save();
+    return true;
 });
 exports.updatePhoto = updatePhoto;
 //# sourceMappingURL=update-photo.js.map

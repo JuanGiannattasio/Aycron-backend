@@ -35,13 +35,6 @@ const UserSchema = new mongoose_1.Schema({
         default: 'USER_ROLE',
         required: true
     },
-    img: {
-        type: String,
-    },
-    google: {
-        type: Boolean,
-        default: false
-    },
 });
 UserSchema.methods.toJSON = function () {
     const _a = this.toObject(), { __v, _id } = _a, user = __rest(_a, ["__v", "_id"]);

@@ -5,11 +5,10 @@ import 'colors'
 import { dbConnection } from '../db/connection';
 
 import userRoute from '../routes/user.route';
-import burgerRoute from '../routes/burger.route';
+import warehouseRoute from '../routes/warehouse.route';
 import authRoute from '../routes/auth.route';
 import uploadRoute from '../routes/upload.route';
-import searchRoute from '../routes/search.route';
-import path from 'path';
+// import searchRoute from '../routes/search.route';
 
 
 class Server {
@@ -19,9 +18,9 @@ class Server {
     private apiPaths = {
         users: '/api/user',
         auth: '/api/auth',
-        burgers: '/api/burger',
+        warehouse: '/api/warehouse',
         upload: '/api/upload',
-        search: '/api/todo'
+        // search: '/api/todo'
     }
     
     constructor() {
@@ -60,7 +59,7 @@ class Server {
         this.app.use( express.json() );
 
         // Public
-        this.app.use( express.static( 'public'));
+        this.app.use( express.static('public'));
 
         // Base route
         // this.app.get('*', (req: Request, res: Response) => {
@@ -74,9 +73,9 @@ class Server {
 
         this.app.use( this.apiPaths.users, userRoute );
         this.app.use( this.apiPaths.auth, authRoute );
-        this.app.use( this.apiPaths.burgers, burgerRoute );
+        this.app.use( this.apiPaths.warehouse, warehouseRoute );
         this.app.use( this.apiPaths.upload, uploadRoute );
-        this.app.use( this.apiPaths.search, searchRoute );
+        // this.app.use( this.apiPaths.search, searchRoute );
 
     }
 

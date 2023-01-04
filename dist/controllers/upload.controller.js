@@ -12,7 +12,7 @@ const fileUpload = (req, res) => {
     const type = req.params.type;
     const id = req.params.id;
     // Validar tipos
-    const validTypes = ['users', 'burgers'];
+    const validTypes = ['warehouse'];
     if (!validTypes.includes(type)) {
         return res.status(400).json({
             ok: false,
@@ -32,7 +32,7 @@ const fileUpload = (req, res) => {
     const cutName = file.name.split('.');
     const archiveExtension = cutName[cutName.length - 1];
     // Validar extension
-    const validExtensions = ['png', 'jpg', 'jpeg', 'gif'];
+    const validExtensions = ['csv', 'pdf'];
     if (!validExtensions.includes(archiveExtension)) {
         return res.status(400).json({
             ok: false,
@@ -40,9 +40,9 @@ const fileUpload = (req, res) => {
         });
     }
     // Generar nombre dle archivo
-    const archiveName = `${uuid_1.v4()}.${archiveExtension}`;
+    const archiveName = `${(0, uuid_1.v4)()}.${archiveExtension}`;
     // Crear el path para guadrar la imagen
-    const path = `./uploads/${type}/${archiveName}`;
+    const path = `./dist/uploads/warehouse/${archiveName}`;
     // @ts-ignore Mover la imagen
     file.mv(path, (err) => {
         if (err) {
@@ -53,7 +53,7 @@ const fileUpload = (req, res) => {
             });
         }
         // Actualizar base de datos
-        update_photo_1.updatePhoto(type, id, archiveName);
+        (0, update_photo_1.updatePhoto)(type, id, archiveName);
         return res.json({
             ok: true,
             msg: 'Archibo subido',
@@ -63,12 +63,11 @@ const fileUpload = (req, res) => {
 };
 exports.fileUpload = fileUpload;
 const showImage = (req, res) => {
-    const type = req.params.type;
     const photo = req.params.photo;
-    const pathImage = path_1.default.join(__dirname, `../uploads/${type}/${photo}`);
+    const pathImage = path_1.default.join(__dirname, `../uploads/warehouse/${photo}`);
     // Imagen por defecto
     if (fs_1.default.existsSync(pathImage)) {
-        res.sendFile(pathImage);
+        res.download(pathImage);
     }
     else {
         const pathImage = path_1.default.join(__dirname, `../uploads/no-image.jpg`);

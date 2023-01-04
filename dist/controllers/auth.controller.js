@@ -39,11 +39,11 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
         // Generar token
-        const token = yield jwt_1.generateJWT(userDB.id);
+        const token = yield (0, jwt_1.generateJWT)(userDB.id);
         return res.json({
             ok: true,
             token,
-            menu: menu_frontend_1.getMenuFrontend(userDB.role),
+            menu: (0, menu_frontend_1.getMenuFrontend)(userDB.role),
             uid: userDB.id
         });
     }
@@ -59,7 +59,7 @@ exports.login = login;
 const googleLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const googleToken = req.body.token;
     try {
-        const { name, email, picture } = yield google_verify_1.googleVerify(googleToken);
+        const { name, email, picture } = yield (0, google_verify_1.googleVerify)(googleToken);
         // Verificar si existe usuario con ese email
         const userDB = yield user_1.default.findOne({ email });
         let user;
@@ -82,11 +82,11 @@ const googleLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         // Guadrar en DB
         yield user.save();
         // JWT
-        const token = yield jwt_1.generateJWT(user.id);
+        const token = yield (0, jwt_1.generateJWT)(user.id);
         return res.json({
             ok: true,
             token,
-            menu: menu_frontend_1.getMenuFrontend(user.role)
+            menu: (0, menu_frontend_1.getMenuFrontend)(user.role)
         });
     }
     catch (error) {
@@ -104,12 +104,12 @@ const renewToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const userDB = yield user_1.default.findById(uid);
         // Generar jwt
-        const token = yield jwt_1.generateJWT(uid);
+        const token = yield (0, jwt_1.generateJWT)(uid);
         return res.json({
             ok: true,
             token,
             userDB,
-            menu: menu_frontend_1.getMenuFrontend(userDB.role)
+            menu: (0, menu_frontend_1.getMenuFrontend)(userDB.role)
         });
     }
     catch (error) {

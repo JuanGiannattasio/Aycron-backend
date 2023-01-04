@@ -1,6 +1,5 @@
 import fs from 'fs';
-import Burger from '../models/burger';
-import User from '../models/user';
+import Warehouse from '../models/warehouse';
 
 
 const deleteImage = ( path: string ) => {
@@ -16,45 +15,20 @@ const deleteImage = ( path: string ) => {
 export const updatePhoto = async( type: string, id: string, archiveName: string ) => {
 
     let oldPath = '';
+    // Verificadno que existe user por ese id
+    const warehouseDB = await Warehouse.findById( id );    
+    if ( !warehouseDB ) {
+        console.log('No existe warehouse por ese ID');
+        return false
+    };
 
-    switch ( type ) {
-        
-        case 'users':
-            // Verificadno que existe user por ese id
-            const userDB = await User.findById( id );    
-            if ( !userDB ) {
-                console.log('No existe user por ese ID');
-                return false
-            };
-            
-            oldPath = `./uploads/users/${ userDB.img }`;
-            deleteImage(oldPath);
+    oldPath = `./uploads/warehouse/${ warehouseDB.file }`;
+    deleteImage(oldPath);
 
-            // Cambiando el name y guardando en db
-            userDB.img = archiveName;
-            await userDB.save();
-            return true
-        break;
-
-        case 'burgers':
-            // Verificadno que existe user por ese id
-            const burgerDB = await Burger.findById( id );    
-            if ( !burgerDB ) {
-                console.log('No existe burger por ese ID');
-                return false
-            };
-            
-            console.log(burgerDB.img)
-            oldPath = `./uploads/burgers/${ burgerDB.img }`;
-            deleteImage(oldPath);
-
-            // Cambiando el name y guardando en db
-            burgerDB.img = archiveName;
-            await burgerDB.save();
-            return true
-        break;
-    
-    }
+    // Cambiando el name y guardando en db
+    warehouseDB.file = archiveName;
+    await warehouseDB.save();
+    return true;
 
 }
 

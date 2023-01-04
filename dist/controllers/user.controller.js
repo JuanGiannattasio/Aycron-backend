@@ -97,12 +97,12 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Guardar en DB
         yield user.save();
         // Generar token
-        const token = yield jwt_1.generateJWT(user.id);
+        const token = yield (0, jwt_1.generateJWT)(user.id);
         return res.json({
             ok: true,
             user,
             token,
-            menu: menu_frontend_1.getMenuFrontend(user.role)
+            menu: (0, menu_frontend_1.getMenuFrontend)(user.role)
         });
     }
     catch (error) {
@@ -137,15 +137,14 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 });
             }
         }
-        if (!(userDB === null || userDB === void 0 ? void 0 : userDB.google)) {
-            fields.email = email;
-        }
-        else if (userDB.email !== email) {
-            return res.status(400).json({
-                ok: false,
-                msg: 'Usuarios de google no pueden cambiar su correo'
-            });
-        }
+        // if ( !userDB?.google ) {
+        //     fields.email = email;
+        // } else if ( userDB.email !== email ) {
+        //     return res.status(400).json({
+        //         ok: false,
+        //         msg: 'Usuarios de google no pueden cambiar su correo'
+        //     })
+        // }
         const userUpdated = yield user_1.default.findByIdAndUpdate(id, fields, { new: true });
         return res.json({
             ok: true,
