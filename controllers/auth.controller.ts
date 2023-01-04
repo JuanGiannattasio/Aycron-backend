@@ -22,7 +22,7 @@ export const login = async( req: Request, res: Response ) => {
         if ( !userDB ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Usuario no econtrado y/o password incorrecto'
+                msg: 'The user or password are wrong'
             })
         };
 
@@ -31,7 +31,7 @@ export const login = async( req: Request, res: Response ) => {
         if ( !validPassword ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Usuario no econtrado y/o password incorrecto'
+                msg: 'The user or password are wrong'
             })
         }
 
@@ -49,7 +49,7 @@ export const login = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(500).json({
             ok: false,
-            msg: 'Por favor hable con el admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -99,7 +99,7 @@ export const googleLogin = async( req: Request, res: Response ) => {
         console.log(error);
         res.status(401).json({
             ok: false,
-            msg: 'Token incorrecto'
+            msg: 'Incorrect token'
         })
     }
 
@@ -129,7 +129,7 @@ export const renewToken = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(500).json({
             ok: false,
-            msg: 'Por favor hable con el admin'
+            msg: 'Talk to admin'
         })
     }
 

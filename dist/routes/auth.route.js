@@ -7,12 +7,12 @@ const valdiate_fields_1 = require("../middlewares/valdiate-fields");
 const validate_roles_1 = require("../middlewares/validate-roles");
 const router = (0, express_1.Router)();
 router.post('/', [
-    (0, express_validator_1.check)('email', 'El email es obligatorio').isEmail(),
-    (0, express_validator_1.check)('password', 'El password es obligatorio').not().isEmpty(),
+    (0, express_validator_1.check)('email', 'The email is reuqired').isEmail(),
+    (0, express_validator_1.check)('password', 'The password is required').not().isEmpty(),
     valdiate_fields_1.valdiateFields
 ], auth_controller_1.login);
 router.post('/google', [
-    (0, express_validator_1.check)('token', 'El token es obligatorio').not().isEmpty(),
+    (0, express_validator_1.check)('token', 'The token is required').not().isEmpty(),
     valdiate_fields_1.valdiateFields
 ], auth_controller_1.googleLogin);
 router.get('/renew', [validate_roles_1.valdiateJWT], auth_controller_1.renewToken);

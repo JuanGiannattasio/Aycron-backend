@@ -30,7 +30,7 @@ export const getWarehouses = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -48,7 +48,7 @@ export const getWarehousesById = async( req: Request, res: Response ) => {
         if ( !warehouse ) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `Warehouse doesnt exists with this id: ${id}`
             })
         };
 
@@ -61,7 +61,7 @@ export const getWarehousesById = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -78,7 +78,7 @@ export const newWarehouse = async( req: Request, res: Response ) => {
         if ( warehouseExists ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El code ya esta registrado'
+                msg: `The code ${code} is alrerady register`
             })
         }
 
@@ -96,7 +96,7 @@ export const newWarehouse = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -114,7 +114,7 @@ export const updateWarehouse = async( req: Request, res: Response ) => {
         if ( !warehouseDB ) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `The warehouse doesnt exists with this id: ${id}`
             })
         };
 
@@ -151,7 +151,7 @@ export const updateWarehouse = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -168,7 +168,7 @@ export const deleteWarehouse = async( req: Request, res: Response ) => {
         if ( !userDB ) {
             return res.status(404).json({
                 ok: false,
-                msg: 'No existe user con ese id'
+                msg: `Doesnt exists warehouse with this id: ${id}`
             })
         }
 
@@ -176,14 +176,14 @@ export const deleteWarehouse = async( req: Request, res: Response ) => {
 
         return res.json({
             ok: true,
-            msg: `Usuario ${userDB.name} borrado con exito`
+            msg: `Warehouse ${userDB.name} deleted`
         })
 
     } catch (error) {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 

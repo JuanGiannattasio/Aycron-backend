@@ -16,7 +16,7 @@ export const fileUpload = ( req: Request, res: Response ) => {
     if ( !validTypes.includes(type) ) {
         return res.status(400).json({
             ok: false,
-            msg: `No es un tipo valido (${validTypes})`
+            msg: `Is not a valid type (${validTypes})`
         });
     }
 
@@ -24,7 +24,7 @@ export const fileUpload = ( req: Request, res: Response ) => {
     if ( !req.files || Object.keys(req.files).length === 0 ) {
         return res.status(400).json({
             ok: false,
-            msg: 'No hay ningún archivo'
+            msg: 'No archive'
         });
     }
 
@@ -40,7 +40,7 @@ export const fileUpload = ( req: Request, res: Response ) => {
     if ( !validExtensions.includes(archiveExtension) ) {
         return res.status(400).json({
             ok: false,
-            msg: `No es una extensión permtida (${validExtensions})`
+            msg: `Is not a valid extension (${validExtensions})`
         });
     }
 
@@ -56,7 +56,7 @@ export const fileUpload = ( req: Request, res: Response ) => {
             console.log(err);
             return res.status(500).json({
                 ok: false,
-                msg: 'Error al mover la iamgen'
+                msg: 'Error moving the image'
             });
         }
 
@@ -65,7 +65,7 @@ export const fileUpload = ( req: Request, res: Response ) => {
 
         return res.json({
             ok: true,
-            msg: 'Archibo subido',
+            msg: 'File uploaded',
             archiveName
         })
     })

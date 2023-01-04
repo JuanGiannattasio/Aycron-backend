@@ -9,13 +9,13 @@ const router = Router();
 
 
 router.post('/', [
-    check('email', 'El email es obligatorio').isEmail(),
-    check('password', 'El password es obligatorio').not().isEmpty(),
+    check('email', 'The email is reuqired').isEmail(),
+    check('password', 'The password is required').not().isEmpty(),
     valdiateFields
 ], login);
 
 router.post('/google', [
-    check('token', 'El token es obligatorio').not().isEmpty(),
+    check('token', 'The token is required').not().isEmpty(),
     valdiateFields
 ], googleLogin)
 

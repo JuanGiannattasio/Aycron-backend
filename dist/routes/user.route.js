@@ -9,17 +9,17 @@ const router = (0, express_1.Router)();
 router.get('/', validate_roles_1.valdiateJWT, user_controller_1.getUsers);
 router.get('/:id', user_controller_1.getUserById);
 router.post('/new', [
-    (0, express_validator_1.check)('name', 'El nombre es requerido').not().isEmpty(),
-    (0, express_validator_1.check)('email', 'El email es requerido').isEmail(),
-    (0, express_validator_1.check)('password', 'El password es requerido').not().isEmpty(),
+    (0, express_validator_1.check)('name', 'The name is required').not().isEmpty(),
+    (0, express_validator_1.check)('email', 'The email is required').isEmail(),
+    (0, express_validator_1.check)('password', 'The password is required').not().isEmpty(),
     valdiate_fields_1.valdiateFields
 ], user_controller_1.newUser);
 router.put('/:id', [
     validate_roles_1.valdiateJWT,
     validate_roles_1.validateADMIN_ROLE_o_MismoUser,
-    (0, express_validator_1.check)('name', 'El nombre es obligatorio').not().isEmpty(),
-    (0, express_validator_1.check)('email', 'El email es obligatorio').isEmail(),
-    (0, express_validator_1.check)('role', 'El rol es obligatorio').not().isEmpty(),
+    (0, express_validator_1.check)('name', 'The name is required').not().isEmpty(),
+    (0, express_validator_1.check)('email', 'the email is rquired').isEmail(),
+    (0, express_validator_1.check)('role', 'The role is required').not().isEmpty(),
     valdiate_fields_1.valdiateFields
 ], user_controller_1.updateUser);
 router.delete('/:id', [

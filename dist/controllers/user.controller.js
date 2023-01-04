@@ -49,7 +49,7 @@ const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -62,7 +62,7 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (!user) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `User dont exists with this id: ${id}`
             });
         }
         ;
@@ -75,7 +75,7 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -87,7 +87,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (userExists) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El email ya esta registrado'
+                msg: 'Email already register'
             });
         }
         const user = new user_1.default(req.body);
@@ -109,7 +109,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -122,7 +122,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!userDB) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `User doesnt exists with this id: ${id}`
             });
         }
         ;
@@ -133,7 +133,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             if (emailExists) {
                 return res.status(400).json({
                     ok: false,
-                    msg: `Ya existe un usuario con el email ${email}`
+                    msg: `User already exists with this email: ${email}`
                 });
             }
         }
@@ -155,7 +155,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -167,20 +167,20 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!userDB) {
             return res.status(404).json({
                 ok: false,
-                msg: 'No existe user con ese id'
+                msg: 'Doesnt exists user whit that id'
             });
         }
         yield user_1.default.findByIdAndDelete(id);
         return res.json({
             ok: true,
-            msg: `Usuario ${userDB.name} borrado con exito`
+            msg: `User ${userDB.name} deleted`
         });
     }
     catch (error) {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });

@@ -16,14 +16,14 @@ const fileUpload = (req, res) => {
     if (!validTypes.includes(type)) {
         return res.status(400).json({
             ok: false,
-            msg: `No es un tipo valido (${validTypes})`
+            msg: `Is not a valid type (${validTypes})`
         });
     }
     // Validar que exista un archivo
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).json({
             ok: false,
-            msg: 'No hay ningún archivo'
+            msg: 'No archive'
         });
     }
     // Procesar la imagen...
@@ -36,7 +36,7 @@ const fileUpload = (req, res) => {
     if (!validExtensions.includes(archiveExtension)) {
         return res.status(400).json({
             ok: false,
-            msg: `No es una extensión permtida (${validExtensions})`
+            msg: `Is not a valid extension (${validExtensions})`
         });
     }
     // Generar nombre dle archivo
@@ -49,14 +49,14 @@ const fileUpload = (req, res) => {
             console.log(err);
             return res.status(500).json({
                 ok: false,
-                msg: 'Error al mover la iamgen'
+                msg: 'Error moving the image'
             });
         }
         // Actualizar base de datos
         (0, update_photo_1.updatePhoto)(type, id, archiveName);
         return res.json({
             ok: true,
-            msg: 'Archibo subido',
+            msg: 'File uploaded',
             archiveName
         });
     });

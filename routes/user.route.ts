@@ -27,18 +27,18 @@ router.get('/', valdiateJWT, getUsers);
 router.get('/:id', getUserById);
 
 router.post('/new', [
-    check( 'name', 'El nombre es requerido' ).not().isEmpty(),
-    check( 'email', 'El email es requerido' ).isEmail(),
-    check( 'password', 'El password es requerido' ).not().isEmpty(),
+    check( 'name', 'The name is required' ).not().isEmpty(),
+    check( 'email', 'The email is required' ).isEmail(),
+    check( 'password', 'The password is required' ).not().isEmpty(),
     valdiateFields
 ], newUser);
 
 router.put('/:id', [
     valdiateJWT,
     validateADMIN_ROLE_o_MismoUser,
-    check( 'name', 'El nombre es obligatorio' ).not().isEmpty(),
-    check( 'email', 'El email es obligatorio' ).isEmail(),
-    check( 'role', 'El rol es obligatorio' ).not().isEmpty(),
+    check( 'name', 'The name is required' ).not().isEmpty(),
+    check( 'email', 'the email is rquired' ).isEmail(),
+    check( 'role', 'The role is required' ).not().isEmpty(),
     valdiateFields
 ], updateUser);
 

@@ -26,7 +26,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!userDB) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Usuario no econtrado y/o password incorrecto'
+                msg: 'The user or password are wrong'
             });
         }
         ;
@@ -35,7 +35,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Usuario no econtrado y/o password incorrecto'
+                msg: 'The user or password are wrong'
             });
         }
         // Generar token
@@ -51,7 +51,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(error);
         return res.status(500).json({
             ok: false,
-            msg: 'Por favor hable con el admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -93,7 +93,7 @@ const googleLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         console.log(error);
         res.status(401).json({
             ok: false,
-            msg: 'Token incorrecto'
+            msg: 'Incorrect token'
         });
     }
 });
@@ -116,7 +116,7 @@ const renewToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         console.log(error);
         return res.status(500).json({
             ok: false,
-            msg: 'Por favor hable con el admin'
+            msg: 'Talk to admin'
         });
     }
 });

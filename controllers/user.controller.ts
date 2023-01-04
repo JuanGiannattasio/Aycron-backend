@@ -32,7 +32,7 @@ export const getUsers = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -50,7 +50,7 @@ export const getUserById = async( req: Request, res: Response ) => {
         if ( !user ) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `User dont exists with this id: ${id}`
             })
         };
 
@@ -63,7 +63,7 @@ export const getUserById = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -80,7 +80,7 @@ export const newUser = async( req: Request, res: Response ) => {
         if ( userExists ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El email ya esta registrado'
+                msg: 'Email already register'
             })
         }
 
@@ -107,7 +107,7 @@ export const newUser = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -125,7 +125,7 @@ export const updateUser = async( req: Request, res: Response ) => {
         if ( !userDB ) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `User doesnt exists with this id: ${id}`
             })
         };
 
@@ -137,7 +137,7 @@ export const updateUser = async( req: Request, res: Response ) => {
             if ( emailExists ) {
                 return res.status(400).json({
                     ok: false,
-                    msg: `Ya existe un usuario con el email ${email}`
+                    msg: `User already exists with this email: ${email}`
                 })
             }
         }
@@ -162,7 +162,7 @@ export const updateUser = async( req: Request, res: Response ) => {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 
@@ -179,7 +179,7 @@ export const deleteUser = async( req: Request, res: Response ) => {
         if ( !userDB ) {
             return res.status(404).json({
                 ok: false,
-                msg: 'No existe user con ese id'
+                msg: 'Doesnt exists user whit that id'
             })
         }
 
@@ -187,14 +187,14 @@ export const deleteUser = async( req: Request, res: Response ) => {
 
         return res.json({
             ok: true,
-            msg: `Usuario ${userDB.name} borrado con exito`
+            msg: `User ${userDB.name} deleted`
         })
 
     } catch (error) {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         })
     }
 

@@ -46,7 +46,7 @@ const getWarehouses = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -59,7 +59,7 @@ const getWarehousesById = (req, res) => __awaiter(void 0, void 0, void 0, functi
         if (!warehouse) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `Warehouse doesnt exists with this id: ${id}`
             });
         }
         ;
@@ -72,7 +72,7 @@ const getWarehousesById = (req, res) => __awaiter(void 0, void 0, void 0, functi
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -84,7 +84,7 @@ const newWarehouse = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         if (warehouseExists) {
             return res.status(400).json({
                 ok: false,
-                msg: 'El code ya esta registrado'
+                msg: `The code ${code} is alrerady register`
             });
         }
         const warehouse = new warehouse_1.default(req.body);
@@ -99,7 +99,7 @@ const newWarehouse = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -112,7 +112,7 @@ const updateWarehouse = (req, res) => __awaiter(void 0, void 0, void 0, function
         if (!warehouseDB) {
             res.status(404).json({
                 ok: false,
-                msg: `El user no existe con ese ${id}`
+                msg: `The warehouse doesnt exists with this id: ${id}`
             });
         }
         ;
@@ -145,7 +145,7 @@ const updateWarehouse = (req, res) => __awaiter(void 0, void 0, void 0, function
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
@@ -157,20 +157,20 @@ const deleteWarehouse = (req, res) => __awaiter(void 0, void 0, void 0, function
         if (!userDB) {
             return res.status(404).json({
                 ok: false,
-                msg: 'No existe user con ese id'
+                msg: `Doesnt exists warehouse with this id: ${id}`
             });
         }
         yield warehouse_1.default.findByIdAndDelete(id);
         return res.json({
             ok: true,
-            msg: `Usuario ${userDB.name} borrado con exito`
+            msg: `Warehouse ${userDB.name} deleted`
         });
     }
     catch (error) {
         console.log(error);
         return res.status(400).json({
             ok: false,
-            msg: 'Por favor contacte a un admin'
+            msg: 'Talk to admin'
         });
     }
 });
